@@ -73,11 +73,14 @@ class FileStorage:
         """
         If the object is in the dictionary, return the object
         """
-        for i in classes:
-            if cls == classes[i]:
-                for obj in self.all(cls).values():
-                    if id == obj.id:
-                        return(obj)
+        try:
+            for i in classes:
+                if cls == classes[i]:
+                    for obj in self.all(cls).values():
+                        if id == obj.id:
+                            return(obj)
+        except Exception:
+            return None
 
     def count(self, cls=None):
         """

@@ -80,12 +80,15 @@ class DBStorage:
         It returns an object of the class passed as an argument,
         with the id passed as an argument
         """
-        for i in classes:
-            if cls is classes[i]:
-                objs = self.__session.query(classes[i]).all()
-                for obj in objs:
-                    if id == obj.id:
-                        return obj
+        try:
+            for i in classes:
+                if cls is classes[i]:
+                    objs = self.__session.query(classes[i]).all()
+                    for obj in objs:
+                        if id == obj.id:
+                            return obj
+        except Exception:
+            return None
 
     def count(self, cls=None):
         """
