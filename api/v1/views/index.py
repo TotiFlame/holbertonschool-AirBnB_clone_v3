@@ -13,6 +13,7 @@ def jsmessage():
     return(jsonify({"status": "OK"}))
 
 
+
 @app_views.route('/stats', strict_slashes=False)
 def num_obj():
     return jsonify({
