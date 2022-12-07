@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Create a new view for State objects"""
+"""
+Create a new view for State objects
+"""
 
 
 from flask import Flask, jsonify, abort
@@ -48,3 +50,6 @@ def del_state(state_id):
 
 
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
