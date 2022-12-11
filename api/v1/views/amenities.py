@@ -3,6 +3,7 @@
 Create a new view for Amenity objects
 """
 
+
 from flask import Flask, jsonify, abort
 from models import state, storage
 from models.amenity import Amenity
