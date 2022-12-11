@@ -17,12 +17,12 @@ def show_all_cities(state_id):
     cities_list = []
     cities = storage.all("City").values()
     
-    for states in storage.all("State").values():
-        if states.id == state_id:
+    for st in storage.all("State").values():
+        if st.id == state_id:
             state = storage.all()["State" + '.' + state_id]
             if state.cities:
-                for city in cities:
-                    if city.state_id == state_id:
-                        cities_list.append(city.to_dict())
-            return jsonify(cities_list)
+                for c in cities:
+                    if c.state_id == state_id:
+                        cities_list.append(c)
+            return jsonify(cities_list.to_dict())
     abort(404)
