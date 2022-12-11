@@ -4,7 +4,7 @@ Create a new view for State objects
 """
 
 
-from flask import Flask, jsonify, abort
+from flask import Flask, jsonify, abort, request
 from models import state, storage
 from models.state import State
 from api.v1.views import app_views
@@ -49,7 +49,20 @@ def del_state(state_id):
             return jsonify({}), 200
     abort(404)
 
-# @app_views.route('/states', methods=['POST'], strict_slashes=False)
-
+@app_views.route('/states', methods=['POST'], strict_slashes=False)
+def create_st():
+    """
+    - Creates a State
+    - If the HTTP body request is not valid JSON, raise a 400 error with the message Not a JSON
+    - If the dictionary doesn’t contain the key name, raise a 400 error with the message Missing name
+    """
+    state = request.get_json(silent=True)
+    if state is None:
+        abort(400, 'Not a JSON')
+    if "name" not in state.key():
+        abort(400, 'Missing name')
+    new_st = State(state)
+    new_st.save()
+    return jsonify(new_st.to_dict()), 201
 
 # @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
