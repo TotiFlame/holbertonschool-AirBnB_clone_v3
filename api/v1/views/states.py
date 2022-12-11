@@ -31,6 +31,7 @@ def show_one_state(state_id):
     for state in states:
         if state.id == state_id:
             return jsonify(state.to_dict())
+    abort(404)
 
 
 @app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)
@@ -40,10 +41,12 @@ def del_state(state_id):
     - if the state id isnt linked to any state object, raise a 404 error
     - Returns an empty dictionary with the status code 200
     """
-    state_and_id = storage.get("State", state_id)
-    if state_and_id is None:
+    states = storage.all("State").values()
+    for state in states:
+        if state.id == state_id:
+            storage.delete(state)
+    if state is None:
         abort(404)
-    storage.delete(state_and_id)
     return jsonify({}), 200
 
 # @app_views.route('/states', methods=['POST'], strict_slashes=False)
