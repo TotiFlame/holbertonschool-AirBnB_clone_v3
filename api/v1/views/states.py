@@ -61,7 +61,7 @@ def create_st():
         abort(400, 'Not a JSON')
     if "name" not in state.key():
         abort(400, 'Missing name')
-    new_st = State(state)
+    new_st = State(**state)
     new_st.save()
     return jsonify(new_st.to_dict()), 201
 
