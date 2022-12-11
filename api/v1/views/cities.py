@@ -17,5 +17,5 @@ def show_all_cities(state_id):
     states =  storage.all("State").values()
     for state in states:
         if state.id == state_id:
-            return jsonify(state.cities.to_dict)
+            return jsonify(state.cities.to_dict())
     abort(404)
