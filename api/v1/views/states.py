@@ -46,10 +46,10 @@ def del_state(state_id):
     storage.delete(state_and_id)
     return jsonify({}), 200
 
-@app_views.route('/states', methods=['POST'], strict_slashes=False)
+# @app_views.route('/states', methods=['POST'], strict_slashes=False)
 
 
-@app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
+# @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
