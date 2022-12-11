@@ -3,6 +3,7 @@
 Create a new view for Amenity objects
 """
 
+
 from flask import Flask, jsonify, abort
 from models import state, storage
 from models.amenity import Amenity
@@ -28,7 +29,7 @@ def show_one(amenity_id):
     return jsonify(amenity.to_dict())
 
 @app_views.route("/amenities/<amenity_id>", methods=['DELETE'], strict_slashes=False)
-def show_one(amenity_id):
+def delete_one(amenity_id):
     amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         abort(404)
