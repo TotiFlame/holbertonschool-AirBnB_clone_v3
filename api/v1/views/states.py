@@ -6,6 +6,7 @@ Create a new view for State objects
 
 from flask import Flask, jsonify, abort
 from models import state, storage
+from models.state import State
 from api.v1.views import app_views
 
 
