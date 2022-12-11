@@ -12,7 +12,7 @@ from api.v1.views import app_views
 @app_views.route("/amenities", methods=['GET'], strict_slashes=False)
 def show_all():
     am_list = []
-    ameni = storage.all(Amenity).values()
+    ameni = storage.all("Amenity").values()
     if ameni is None:
         abort(404)
     for amenities in ameni:
@@ -22,7 +22,7 @@ def show_all():
 
 @app_views.route("/amenities/<amenity_id>", methods=['GET'], strict_slashes=False)
 def show_one(amenity_id):
-    amenity = storage.get(Amenity, amenity)
+    amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         abort(404)
     return jsonify(amenity.to_dict())
