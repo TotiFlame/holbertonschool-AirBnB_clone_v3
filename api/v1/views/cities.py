@@ -14,8 +14,13 @@ def show_all_cities(state_id):
     It returns a JSON
     representation of all the cities in a state
     """
-    states =  storage.all("State").values()
+    cities_list = []
+    cities =  storage.all("City").values()
+    states = storage.all("State").values()
     for state in states:
         if state.id == state_id:
-            return jsonify(state.cities.to_dict())
+            for city in cities:
+                if city.state_id == state_id:
+                    cities_list.append(city.to_dict())
+            return jsonify(cities_list)
     abort(404)
