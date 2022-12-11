@@ -17,7 +17,7 @@ def states_list():
     n_dict = []
     _list = storage.all("State").values()
     for state in _list:
-        n_dict.append(state)
+        n_dict.append(state.to_dict())
     return jsonify(n_dict)
 
 
@@ -27,10 +27,11 @@ def show_one_state(state_id):
     - Retrieves a State object
     - if the state id isnt linked to any state object, raise a 404 error
     """
-    state_and_id = storage.get("State", state_id)
-    if state_and_id is None:
+    state = None
+    state = storage.get("State", state_id)
+    if state is None:
         abort(404)
-    return jsonify(state_and_id)
+    return jsonify(state.to_dict())
 
 
 @app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)
