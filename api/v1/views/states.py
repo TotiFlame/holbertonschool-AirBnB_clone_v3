@@ -59,7 +59,7 @@ def create_st():
     state = request.get_json(silent=True)
     if state is None:
         abort(400, 'Not a JSON')
-    if "name" not in state.key():
+    if "name" not in state:
         abort(400, 'Missing name')
     new_st = State(**state)
     new_st.save()
