@@ -27,11 +27,10 @@ def show_one_state(state_id):
     - Retrieves a State object
     - if the state id isnt linked to any state object, raise a 404 error
     """
-    state = None
-    state = storage.get("State", state_id)
-    if state is None:
-        abort(404)
-    return jsonify(state.to_dict())
+    states = storage.all("State").values()
+    for state in states:
+        if state.id == state_id:
+            return jsonify(state.to_dict())
 
 
 @app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)
