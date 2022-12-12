@@ -4,7 +4,7 @@ Create a new view for City objects
 """
 
 
-from flask import Flask, jsonify, abort
+from flask import Flask, jsonify, abort, request
 from models import state, storage
 from models.city import City
 from models.state import State
@@ -46,3 +46,21 @@ def del_city(city_id):
     storage.delete(city)
     storage.save()
     return jsonify({}), 200
+
+@app_views.route('/states/<state_id>/cities', methods=['POST'], strict_slashes=False)
+def create_ct(state_id):
+    """
+    - Creates a State
+    - If the HTTP body request is not valid JSON, raise a 400 error with the message Not a JSON
+    - If the dictionary doesn’t contain the key name, raise a 400 error with the message Missing name
+    """
+    if state_id is None:
+        abort(404)
+    city = request.get_json(silent=True)
+    if city is None:
+        abort(400, 'Not a JSON')
+    if "name" not in city:
+        abort(400, 'Missing name')
+    new_ct = City(**city)
+    new_ct.save()
+    return jsonify(new_ct.to_dict()), 200
