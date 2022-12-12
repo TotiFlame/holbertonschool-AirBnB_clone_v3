@@ -65,4 +65,27 @@ def create_st():
     new_st.save()
     return jsonify(new_st.to_dict()), 201
 
-# @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
+
+@app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
+def update_st(state_id):
+    """
+    - Updates a State
+    - If the state_id is not linked to any State object, raise a 404 error
+    - If not vlid json, raise a 400 error with the message Not a JSON
+    - Update the State object with all key-value pairs of the dictionary.
+    - Returns the State object with the status code 200
+    """
+    state_and_id = storage.get("State", state_id)
+    state = request.get_json(silent=True)
+
+    if state_and_id is None:
+        abort(404)
+    if state is None:
+        abort(400, 'Not a JSON')
+
+    for key, value in state.items():
+        if key in ['id', 'created_at', 'updated_at']:
+            pass
+        setattr(state_and_id, key, value)
+    state_and_id.save()
+    return jsonify(state_and_id.to_dict()), 200
