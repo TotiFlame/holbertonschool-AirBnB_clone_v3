@@ -11,7 +11,7 @@ from api.v1.views import app_views
 
 
 @app_views.route("/cities/<city_id>/places", methods=['GET'], strict_slashes=False)
-def show_all(city_id):
+def show_all_p(city_id):
     place_list = []
     pl = storage.get("City", city_id)
     if pl is None:
@@ -22,7 +22,7 @@ def show_all(city_id):
 
 
 @app_views.route("/places/<place_id>", methods=['GET'], strict_slashes=False)
-def show_one(place_id):
+def show_one_place(place_id):
     place = storage.get(Place, place_id)
     if place is None:
         abort(404)
@@ -30,7 +30,7 @@ def show_one(place_id):
 
 
 @app_views.route("/places/<place_id>", methods=['DELETE'], strict_slashes=False)
-def delete_one(place_id):
+def delete_one_place(place_id):
     place = storage.get(Place, place_id)
     if place is None:
         abort(404)
@@ -60,7 +60,7 @@ def create_place(city_id):
 
 
 @app_views.route('/places/<place_id>', methods=['PUT'], strict_slashes=False)
-def update_pl(place_id):
+def update_place(place_id):
     place_and_id = storage.get(Place, place_id)
     pl = request.get_json(silent=True)
 
