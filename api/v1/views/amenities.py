@@ -39,15 +39,10 @@ def delete_one(amenity_id):
 
 @app_views.route("/amenities", methods=['POST'], strict_slashes=False)
 def create_am():
-    """
-    - Creates a State
-    - If the HTTP body request is not valid JSON, raise a 400 error with the message Not a JSON
-    - If the dictionary doesn’t contain the key name, raise a 400 error with the message Missing name
-    """
     amenity = request.get_json(silent=True)
     if amenity is None:
         abort(400, 'Not a JSON')
-    if "name" not in state:
+    if "name" not in amenity:
         abort(400, 'Missing name')
     new_am = Amenity(**amenity)
     new_am.save()
