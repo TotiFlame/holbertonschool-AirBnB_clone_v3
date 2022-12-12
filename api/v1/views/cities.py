@@ -54,7 +54,8 @@ def create_ct(state_id):
     - If the HTTP body request is not valid JSON, raise a 400 error with the message Not a JSON
     - If the dictionary doesn’t contain the key name, raise a 400 error with the message Missing name
     """
-    if state_id is None:
+    st = storage.get(State, state_id)
+    if st is None:
         abort(404)
     city = request.get_json(silent=True)
     if city is None:
