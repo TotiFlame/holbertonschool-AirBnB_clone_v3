@@ -37,7 +37,7 @@ def delete_one(amenity_id):
     storage.save()
     return jsonify({}), 200
 
-@app_views.route("/amenities", methods=['DELETE'], strict_slashes=False)
+@app_views.route("/amenities", methods=['POST'], strict_slashes=False)
 def create_am():
     """
     - Creates a State
