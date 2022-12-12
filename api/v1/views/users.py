@@ -22,7 +22,7 @@ def show_all():
 
 
 @app_views.route("/users/<user_id>", methods=['GET'], strict_slashes=False)
-def show_one(user_id):
+def show_one_us(user_id):
     user = storage.get(User, user_id)
     if user is None:
         abort(404)

@@ -11,7 +11,7 @@ from api.v1.views import app_views
 
 
 @app_views.route("/amenities", methods=['GET'], strict_slashes=False)
-def show_all():
+def show_all_am():
     am_list = []
     ameni = storage.all("Amenity").values()
     if ameni is None:
@@ -23,7 +23,7 @@ def show_all():
 
 @app_views.route("/amenities/<amenity_id>",
                  methods=['GET'], strict_slashes=False)
-def show_one(amenity_id):
+def show_one_am(amenity_id):
     amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         abort(404)
