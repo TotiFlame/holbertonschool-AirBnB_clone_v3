@@ -58,6 +58,7 @@ def create_ct(state_id):
     if st is None:
         abort(404)
     city = request.get_json(silent=True)
+    city['state_id'] = state_id
     if city is None:
         abort(400, 'Not a JSON')
     if "name" not in city:
