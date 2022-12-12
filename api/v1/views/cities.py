@@ -73,7 +73,7 @@ def create_ct(state_id):
 
 
 @app_views.route('/cities/<city_id>', methods=['PUT'], strict_slashes=False)
-def update_st(city_id):
+def update_ct(city_id):
     city_and_id = storage.get(City, city_id)
     city = request.get_json(silent=True)
 
