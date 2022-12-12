@@ -58,11 +58,11 @@ def create_ct(state_id):
     if st is None:
         abort(404)
     city = request.get_json(silent=True)
-    city['state_id'] = state_id
     if city is None:
         abort(400, 'Not a JSON')
     if "name" not in city:
         abort(400, 'Missing name')
+    city['state_id'] = state_id
     new_ct = City(**city)
     new_ct.save()
     return jsonify(new_ct.to_dict()), 200
