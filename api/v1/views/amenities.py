@@ -4,7 +4,7 @@ Create a new view for Amenity objects
 """
 
 
-from flask import Flask, jsonify, abort
+from flask import Flask, jsonify, abort, request
 from models import state, storage
 from models.amenity import Amenity
 from api.v1.views import app_views
@@ -36,3 +36,19 @@ def delete_one(amenity_id):
     storage.delete(amenity)
     storage.save()
     return jsonify({}), 200
+
+@app_views.route("/amenities", methods=['DELETE'], strict_slashes=False)
+def create_am():
+    """
+    - Creates a State
+    - If the HTTP body request is not valid JSON, raise a 400 error with the message Not a JSON
+    - If the dictionary doesn’t contain the key name, raise a 400 error with the message Missing name
+    """
+    amenity = request.get_json(silent=True)
+    if amenity is None:
+        abort(400, 'Not a JSON')
+    if "name" not in state:
+        abort(400, 'Missing name')
+    new_am = Amenity(**amenity)
+    new_am.save()
+    return jsonify(new_am.to_dict()), 201

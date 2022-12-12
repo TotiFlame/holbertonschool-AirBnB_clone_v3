@@ -65,4 +65,4 @@ def create_ct(state_id):
     city['state_id'] = state_id
     new_ct = City(**city)
     new_ct.save()
-    return jsonify(new_ct.to_dict()), 200
+    return jsonify(new_ct.to_dict()), 201
