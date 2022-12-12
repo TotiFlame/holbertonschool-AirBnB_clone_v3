@@ -75,7 +75,7 @@ def update_st(state_id):
     - Update the State object with all key-value pairs of the dictionary.
     - Returns the State object with the status code 200
     """
-    state_and_id = storage.get("State", state_id)
+    state_and_id = storage.get(State, state_id)
     state = request.get_json(silent=True)
 
     if state_and_id is None:
