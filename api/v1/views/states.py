@@ -34,7 +34,8 @@ def show_one_state(state_id):
     abort(404)
 
 
-@app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/states/<state_id>',
+                 methods=['DELETE'], strict_slashes=False)
 def del_state(state_id):
     """
     - Deletes a State object
@@ -49,12 +50,15 @@ def del_state(state_id):
             return jsonify({}), 200
     abort(404)
 
+
 @app_views.route('/states', methods=['POST'], strict_slashes=False)
 def create_st():
     """
     - Creates a State
-    - If the HTTP body request is not valid JSON, raise a 400 error with the message Not a JSON
-    - If the dictionary doesn’t contain the key name, raise a 400 error with the message Missing name
+    - If the HTTP body request is not valid JSON,
+    raise a 400 error with the message Not a JSON
+    - If the dictionary doesn’t contain the key name,
+    raise a 400 error with the message Missing name
     """
     state = request.get_json(silent=True)
     if state is None:

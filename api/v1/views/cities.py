@@ -11,7 +11,8 @@ from models.state import State
 from api.v1.views import app_views
 
 
-@app_views.route("/states/<state_id>/cities", methods=['GET'], strict_slashes=False)
+@app_views.route("/states/<state_id>/cities",
+                 methods=['GET'], strict_slashes=False)
 def show_all_cities(state_id):
     """
     It returns a JSON
@@ -51,12 +52,15 @@ def del_city(city_id):
     return jsonify({}), 200
 
 
-@app_views.route('/states/<state_id>/cities', methods=['POST'], strict_slashes=False)
+@app_views.route('/states/<state_id>/cities',
+                 methods=['POST'], strict_slashes=False)
 def create_ct(state_id):
     """
     - Creates a State
-    - If the HTTP body request is not valid JSON, raise a 400 error with the message Not a JSON
-    - If the dictionary doesn’t contain the key name, raise a 400 error with the message Missing name
+    - If the HTTP body request is not valid JSON,
+    raise a 400 error with the message Not a JSON
+    - If the dictionary doesn’t contain the key name,
+    raise a 400 error with the message Missing name
     """
     st = storage.get(State, state_id)
     if st is None:
